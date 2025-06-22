@@ -1,0 +1,14 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+
+# Ignore Python artifacts
+__pycache__/
+*.pyc
+
+# Ignore local env files
+.env
+.env.*
+
+# Ignore Alembic cache (optional)
+alembic/__pycache__/
