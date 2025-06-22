@@ -36,6 +36,7 @@ class Purchase(Base):
         index=True,
         doc="ID of the branch where the purchase was made"
     )
+
     user_id = Column(
         UUID(as_uuid=True),
         ForeignKey("users.id", ondelete="CASCADE"),
@@ -43,12 +44,14 @@ class Purchase(Base):
         index=True,
         doc="ID of the customer who made the purchase"
     )
+
     timestamp = Column(
         DateTime(timezone=True),
         server_default=func.now(),
         nullable=False,
         doc="When the purchase was made"
     )
+
     total_amount = Column(
         NUMERIC,
         nullable=False,
@@ -61,11 +64,13 @@ class Purchase(Base):
         back_populates="purchases",
         doc="Relationship to the Branch model"
     )
+
     user = relationship(
         "User",
         back_populates="purchases",
         doc="Relationship to the User model"
     )
+
     purchase_items = relationship(
         "PurchaseItem",
         back_populates="purchase",
