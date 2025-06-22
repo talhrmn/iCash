@@ -1,5 +1,5 @@
 """
-Main application file for the iCash cash_register service.
+Main application file for the iCash store analytics service.
 
 This module contains the FastAPI application setup and configuration.
 """
@@ -14,10 +14,10 @@ from fastapi.responses import JSONResponse
 from sqlalchemy import text
 from sqlalchemy.exc import SQLAlchemyError
 
-from cash_register.app.logger import logger
-from cash_register.app.routers.api import api_router
-from cash_register.core.config import settings
 from shared.database import SessionLocal
+from store_analytics.app.logger import logger
+from store_analytics.app.routers.api import api_router
+from store_analytics.core.config import settings
 
 
 @asynccontextmanager
@@ -33,7 +33,8 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
     Yields:
         None: Application context
     """
-    logger.info("🚀 Starting iCash cash_register...")
+    logger.info("🚀 Starting iCash store_analytics...")
+
     try:
         db = SessionLocal()
         try:
@@ -45,7 +46,7 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
         finally:
             db.close()
 
-        logger.info("🎮 iCash cash_register started successfully!")
+        logger.info("🎮 iCash store_analytics started successfully!")
 
     except Exception as e:
         logger.error(f"❌ Failed to start application: {str(e)}")
@@ -53,13 +54,13 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
 
     yield
 
-    logger.info("🎮 Shutting down iCash cash_register...")
-    logger.info("✅ iCash cash_register shutdown complete!")
+    logger.info("🛑 Shutting down iCash Analytics...")
+    logger.info("👋 Application shutdown complete")
 
 
 app = FastAPI(
-    title="iCash - Cashier",
-    description="Cash register service for iCash supermarkets",
+    title="iCash - Analytics",
+    description="Analytics service for iCash supermarkets",
     version="1.0.0",
     lifespan=lifespan,
     debug=settings.DEBUG
@@ -184,9 +185,9 @@ async def root():
         dict: API information
     """
     return {
-        "name": "iCash Register API",
+        "name": "iCash Analytics API",
         "version": "1.0.0",
-        "description": "Register service for iCash supermarkets",
+        "description": "Analytics service for iCash supermarkets",
         "documentation": "/docs",
         "endpoints": {
             "health": "/health",
@@ -194,9 +195,10 @@ async def root():
             "api": "/api/analytics"
         },
         "features": [
-            "Get all branches",
-            "Get all products",
-            "Create a new purchase",
+            "Count unique buyers across chain",
+            "Identify loyal customers (3+ purchases)",
+            "Top 3 best-selling products analysis",
+            "Real-time analytics dashboard"
         ]
     }
 
@@ -213,7 +215,6 @@ async def log_requests(request, call_next):
 
     try:
         response = await call_next(request)
-
         process_time = __import__('time').time() - start_time
         logger.info(
             f"📤 {request.method} {request.url.path} - Status: {response.status_code} - Time: {process_time:.3f}s")
@@ -231,12 +232,12 @@ async def log_requests(request, call_next):
 if __name__ == "__main__":
     import uvicorn
 
-    logger.info("🚀 Starting cash-register application...")
+    logger.info("🚀 Starting store-analytics application...")
 
     uvicorn.run(
-        settings.CASH_REGISTER_PATH,
-        host=settings.CASH_REGISTER_HOST,
-        port=settings.CASH_REGISTER_PORT,
+        settings.STORE_ANALYTICS_PATH,
+        host=settings.STORE_ANALYTICS_HOST,
+        port=settings.STORE_ANALYTICS_PORT,
         reload=settings.DEBUG,
         log_level="info",
         access_log=True,
