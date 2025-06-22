@@ -16,6 +16,10 @@ This system implements two main microservices:
     - Tracks customer loyalty
     - Analyzes product sales
 
+
+![img.png](img.png)
+
+
 ## System Requirements
 
 - Docker and Docker Compose
@@ -152,3 +156,6 @@ docker-compose exec postgres alembic upgrade head
 
 - Service logs are stored in their respective log directories
 - Log levels can be configured via environment variables
+
+### Example images
+![img_1.png](img_1.png)
