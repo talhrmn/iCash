@@ -56,6 +56,34 @@ services:
       - app-network
     restart: unless-stopped
 
+  store-analytics:
+    build:
+      context: .
+      dockerfile: store_analytics/Dockerfile
+    env_file:
+      - .env
+    ports:
+      - "8001:8001"
+    environment:
+      DB_HOST: postgres
+      DB_PORT: "5432"
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DATABASE_URL: ${DATABASE_URL}
+      STORE_ANALYTICS_HOST: ${STORE_ANALYTICS_HOST}
+      STORE_ANALYTICS_PORT: "${STORE_ANALYTICS_PORT}"
+      ALLOWED_ORIGINS: ${ALLOWED_ORIGINS}
+      LOG_LEVEL: ${LOG_LEVEL}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./store_analytics/logs:/app/store_analytics/logs
+    networks:
+      - app-network
+    restart: unless-stopped
+
 volumes:
   postgres_data:
 
