@@ -1,0 +1,35 @@
+.container .icon {
+	font-size: 2rem;
+	margin-bottom: var(--spacing-md);
+}
+
+.container .message {
+	margin: 0 0 var(--spacing-lg) 0;
+	color: var(--color-text-secondary);
+	text-align: center;
+}
+
+@media (max-width: 768px) {
+	.grid {
+		grid-template-columns: 1fr;
+		gap: var(--spacing-lg);
+	}
+
+	.analytics .grid {
+		grid-template-columns: 1fr;
+	}
+
+	.detailsGrid {
+		grid-template-columns: 1fr;
+		gap: var(--spacing-lg);
+	}
+
+	.content {
+		padding: var(--spacing-md);
+	}
+
+	.analytics,
+	.purchaseSection {
+		padding: var(--spacing-lg);
+	}
+}

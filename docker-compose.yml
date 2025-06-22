@@ -84,6 +84,27 @@ services:
       - app-network
     restart: unless-stopped
 
+  web_client:
+    build:
+      context: ./web_client
+      dockerfile: Dockerfile
+      args:
+        - VITE_API_CASH_REGISTER_BASE_URL=${VITE_API_CASH_REGISTER_BASE_URL}
+        - VITE_ANALYTICS_API_BASE_URL=${VITE_ANALYTICS_API_BASE_URL}
+    env_file:
+      - .env
+    ports:
+      - "3000:3000"
+    environment:
+      VITE_API_CASH_REGISTER_BASE_URL: ${VITE_API_CASH_REGISTER_BASE_URL}
+      VITE_ANALYTICS_API_BASE_URL: ${VITE_ANALYTICS_API_BASE_URL}
+    depends_on:
+      - cash-register
+      - store-analytics
+    networks:
+      - app-network
+    restart: unless-stopped
+
 volumes:
   postgres_data:
 

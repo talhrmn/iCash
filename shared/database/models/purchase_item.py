@@ -31,18 +31,21 @@ class PurchaseItem(Base):
         primary_key=True,
         doc="ID of the purchase this item belongs to"
     )
+
     product_id = Column(
         UUID(as_uuid=True),
         ForeignKey("products.id", ondelete="RESTRICT"),
         primary_key=True,
         doc="ID of the product being purchased"
     )
+
     quantity = Column(
         Integer,
         nullable=False,
         default=1,
         doc="Number of units purchased (must be 1 or less)"
     )
+
     unit_price = Column(
         NUMERIC,
         nullable=False,
@@ -54,6 +57,7 @@ class PurchaseItem(Base):
         back_populates="purchase_items",
         doc="Relationship to the Purchase model"
     )
+
     product = relationship(
         "Product",
         back_populates="purchase_items",

@@ -29,6 +29,7 @@ class Product(Base):
         default=uuid4,
         doc="Unique identifier for the product"
     )
+
     product_name = Column(
         String,
         unique=True,
@@ -36,6 +37,7 @@ class Product(Base):
         nullable=False,
         doc="Name of the product"
     )
+
     unit_price = Column(
         NUMERIC,
         nullable=False,
