@@ -12,4 +12,5 @@ def get_database_logger() -> logging.Logger:
         console_output=True
     )
 
+
 logger = get_database_logger()

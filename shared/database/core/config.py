@@ -3,6 +3,7 @@ from pydantic_settings import BaseSettings
 
 load_dotenv()
 
+
 class Settings(BaseSettings):
     DATABASE_URL: str
     ENVIRONMENT: str = "development"
@@ -19,5 +20,6 @@ class Settings(BaseSettings):
     REQUIRED_BRANCH_COUNT: int = 3
     REQUIRED_PRODUCT_COUNT: int = 10
     MAX_QUANTITY_PER_PRODUCT: int = 1
+
 
 settings = Settings()
