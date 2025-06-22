@@ -28,6 +28,34 @@ services:
     networks:
       - app-network
 
+  cash-register:
+    build:
+      context: .
+      dockerfile: cash_register/Dockerfile
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+    environment:
+      DB_HOST: postgres
+      DB_PORT: "5432"
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DATABASE_URL: ${DATABASE_URL}
+      CASH_REGISTER_HOST: ${CASH_REGISTER_HOST}
+      CASH_REGISTER_PORT: "${CASH_REGISTER_PORT}"
+      ALLOWED_ORIGINS: ${ALLOWED_ORIGINS}
+      LOG_LEVEL: ${LOG_LEVEL}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./cash_register/logs:/app/cash_register/logs
+    networks:
+      - app-network
+    restart: unless-stopped
+
 volumes:
   postgres_data:
 
