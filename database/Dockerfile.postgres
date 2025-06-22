@@ -1,0 +1,42 @@
+FROM postgres:15
+
+# Install Python and system packages
+RUN apt-get update && apt-get install -y \
+    python3 \
+    python3-pip \
+    python3-venv \
+    && rm -rf /var/lib/apt/lists/*
+
+# Create a virtual environment and install Python packages
+RUN python3 -m venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
+
+# Install Python packages in the virtual environment
+RUN pip install --no-cache-dir \
+    alembic \
+    psycopg2-binary \
+    sqlalchemy \
+    pandas \
+    pydantic-settings
+
+# Copy init scripts and set permissions
+COPY database/init/*.sh /docker-entrypoint-initdb.d/
+COPY database/init/load_init_data.py /docker-entrypoint-initdb.d/
+
+# Make sure all shell scripts are executable
+RUN chmod +x /docker-entrypoint-initdb.d/*.sh
+
+# Set environment variables for Python and paths
+ENV PATH="/opt/venv/bin:$PATH"
+ENV PYTHONPATH="/shared:/alembic:$PYTHONPATH"
+ENV PYTHONUNBUFFERED=1
+
+# Set PostgreSQL connection defaults for init scripts
+ENV PGHOST=/var/run/postgresql
+ENV PGPORT=5432
+
+# Create the /data directory (will be mounted via volume)
+RUN mkdir -p /data
+
+# Ensure proper permissions for mounted directories
+RUN mkdir -p /shared /alembic
