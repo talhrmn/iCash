@@ -43,8 +43,8 @@ This system implements two main microservices:
 ## Setup Instructions
 
 1. **Environment Setup**
-    - Copy `.env.example` to `.env` and update the configuration
-    - Ensure all required environment variables are set
+    - Copy `.env.example` to `.env` in both the root layer, as well as the web_app - and update the configurations as needed.
+    - Ensure all required environment variables are set.
 
 2. **Database Setup**
     - The system uses PostgreSQL
