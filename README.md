@@ -130,21 +130,22 @@ This represents a balanced approach between microservices benefits and practical
 
 ## Database Schema
 
+### Branches Table
+
+- `id`: String (Primary Key)
+
 ### Products Table
 
 - `id`: Integer (Primary Key)
 - `product_name`: String
 - `unit_price`: Float
 
-### Branches Table
-
-- `id`: Integer (Primary Key)
-
 ### Purchases Table
 
 - `id`: Integer (Primary Key)
 - `supermarket_id`: Integer (Foreign Key to Branches)
 - `user_id`: String (UUID4)
+- `items_list`: String
 - `timestamp`: DateTime
 - `total_amount`: Float
 

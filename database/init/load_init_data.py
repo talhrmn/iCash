@@ -200,6 +200,7 @@ def load_purchases_bulk(session, csv_path: str) -> None:
                     "id": purchase_id,
                     "supermarket_id": row["supermarket_id"].strip(),
                     "user_id": uuid.UUID(row["user_id"]),
+                    "items_list": ", ".join(product_names),
                     "timestamp": row["parsed_timestamp"],
                     "total_amount": float(row["total_amount"])
                 }

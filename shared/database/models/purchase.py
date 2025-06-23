@@ -52,6 +52,12 @@ class Purchase(Base):
         doc="When the purchase was made"
     )
 
+    items_list = Column(
+        String,
+        nullable=False,
+        doc="Comma-separated list of items purchased"
+    )
+
     total_amount = Column(
         NUMERIC,
         nullable=False,
