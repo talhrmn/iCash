@@ -142,17 +142,17 @@ This represents a balanced approach between microservices benefits and practical
 
 ### Purchases Table
 
-- `id`: Integer (Primary Key)
-- `supermarket_id`: Integer (Foreign Key to Branches)
-- `user_id`: String (UUID4)
+- `id`: UUID (Primary Key)
+- `supermarket_id`: String (Foreign Key to Branches)
+- `user_id`: UUID (UUID4)
 - `items_list`: String
 - `timestamp`: DateTime
 - `total_amount`: Float
 
 ### Purchase Items Table
 
-- `purchase_id`: Integer (Foreign Key to Purchases)
-- `product_id`: Integer (Foreign Key to Products)
+- `purchase_id`: UUID (Foreign Key to Purchases)
+- `product_id`: UUID (Foreign Key to Products)
 - `quantity`: Integer (Default: 1)
 - `unit_price`: Float
 
