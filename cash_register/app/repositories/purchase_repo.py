@@ -59,6 +59,7 @@ class PurchaseRepository:
                 supermarket_id=supermarket_id,
                 user_id=user_id,
                 timestamp=timestamp or datetime.utcnow(),
+                items_list=", ".join(p.product_name for p in products),
                 total_amount=total_amount
             )
             self.db.add(purchase)
@@ -103,7 +104,6 @@ class PurchaseRepository:
             DatabaseError: If there's an error retrieving the purchase
         """
         try:
-            # Query with eager loading of purchase items and products
             stmt = (
                 select(Purchase)
                 .options(

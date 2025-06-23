@@ -27,15 +27,15 @@ export class CashRegisterApi {
 	}
 
 	public getBranches(): Promise<AxiosResponse<Branch[]>> {
-		return this.api.get(getApiUrl("CASH_REGISTER", "/branch"));
+		return this.api.get(getApiUrl("CASH_REGISTER", "/branch/"));
 	}
 
 	public getProducts(): Promise<AxiosResponse<Product[]>> {
-		return this.api.get(getApiUrl("CASH_REGISTER", "/product"));
+		return this.api.get(getApiUrl("CASH_REGISTER", "/product/"));
 	}
 
 	public createPurchase(data: PurchaseRequest): Promise<AxiosResponse<any>> {
-		return this.api.post(getApiUrl("CASH_REGISTER", "/purchase"), data);
+		return this.api.post(getApiUrl("CASH_REGISTER", "/purchase/"), data);
 	}
 }
 

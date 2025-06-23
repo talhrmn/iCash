@@ -113,7 +113,7 @@ async def get_top_selling_products(
         analytics_service: AnalyticsService instance
 
     Returns:
-        TopSellingProductsResponse: Response containing top selling products
+        TopSellingProductsResponse: Response containing top-selling products
 
     Raises:
         HTTPException: If there's an error retrieving top products
