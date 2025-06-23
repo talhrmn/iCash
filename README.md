@@ -63,7 +63,7 @@ This represents a balanced approach between microservices benefits and practical
 ## Setup Instructions
 
 1. **Environment Setup**
-    - Copy (or simply rename) `.env.example` to `.env` and update the configuration if needed.
+    - Copy (or simply rename) `.env.example` (root level) to `.env` and update the configuration if needed.
     - Ensure all required environment variables are set.
 
 2. **Database Setup**
