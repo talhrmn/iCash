@@ -24,20 +24,23 @@ This system implements two main microservices:
 
 Architecture Decision: Shared Database Package for Microservices
 
-I opted for a hybrid microservices architecture where both the Cash-Register and Store-Analytics services utilize a shared database package rather than implementing separate databases per service. This architectural choice was driven by several key considerations:
+I opted for a hybrid microservices architecture where both the Cash-Register and Store-Analytics services utilize a shared database package rather than implementing separate databases per service.  
+This architectural choice was driven by several key considerations:
 
-**Shared Data Models & Consistency**
-Both services operate on the same core business entities (Products, Branches, Purchases, Users, etc.), making a shared database package the most pragmatic approach. This ensures data consistency and eliminates the complexity of maintaining synchronized schemas across multiple databases. Any changes to the data models can be managed centrally within the shared package, reducing maintenance overhead and preventing schema drift.
+**Shared Data Models & Consistency**:  
+Both services operate on the same core business entities (Products, Branches, Purchases, Users, etc.), making a shared database package the most pragmatic approach.  
+This ensures data consistency and eliminates the complexity of maintaining synchronized schemas across multiple databases. Any changes to the data models can be managed centrally within the shared package, reducing maintenance overhead and preventing schema drift.
 
-**Real-Time Analytics Requirements**
-The Store-Analytics service requires immediate access to transaction data as purchases occur through the Cash-Register service. By sharing the same database instance, analytics can be computed in real-time without the latency and complexity of eventual consistency patterns or event-driven synchronization that would be required with separate databases.
+**Real-Time Analytics Requirements**:  
+The Store-Analytics service requires immediate access to transaction data as purchases occur through the Cash-Register service.  
+By sharing the same database instance, analytics can be computed in real-time without the latency and complexity of eventual consistency patterns or event-driven synchronization that would be required with separate databases.
 
-**Appropriate Scale Considerations**
-For this application's scale and domain complexity, the benefits of strict service isolation are outweighed by the operational simplicity and data consistency guarantees of a shared database. The services remain logically separated with distinct APIs and responsibilities, while leveraging shared infrastructure for data persistence.
+**Appropriate Scale Considerations**:  
+For this application's scale and domain complexity, the benefits of strict service isolation are outweighed by the operational simplicity and data consistency guarantees of a shared database.  
+The services remain logically separated with distinct APIs and responsibilities, while leveraging shared infrastructure for data persistence.
 
-**Deployment Strategy**
-The shared package approach also simplifies deployment orchestration, as both services can be deployed together with confidence that their data layer dependencies are aligned, while still maintaining the flexibility to scale services independently based on load patterns.
-
+**Deployment Strategy**:  
+The shared package approach also simplifies deployment orchestration, as both services can be deployed together with confidence that their data layer dependencies are aligned, while still maintaining the flexibility to scale services independently based on load patterns.  
 This represents a balanced approach between microservices benefits and practical implementation constraints for a retail management system of this scope.
 
 ## System Requirements
