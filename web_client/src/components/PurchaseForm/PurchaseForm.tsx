@@ -145,7 +145,6 @@ export const PurchaseForm: React.FC = () => {
 
 				if (formData.userId) purchaseData.user_id = formData.userId;
 
-				console.log("Purchase data:", purchaseData);
 				await createPurchase.mutateAsync(purchaseData);
 
 				setSuccessMessage(
