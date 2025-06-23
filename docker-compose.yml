@@ -98,6 +98,7 @@ services:
     environment:
       VITE_API_CASH_REGISTER_BASE_URL: ${VITE_API_CASH_REGISTER_BASE_URL}
       VITE_ANALYTICS_API_BASE_URL: ${VITE_ANALYTICS_API_BASE_URL}
+      VITE_APP_ENV: ${VITE_APP_ENV}
     depends_on:
       - cash-register
       - store-analytics
